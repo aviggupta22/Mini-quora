@@ -1,0 +1,33 @@
+<%- include("../partials/_head", { title: "Add New Post" }) %>
+
+<div class="card">
+  <h2>Add New Post</h2>
+  <form method="post" action="/posts" class="stack">
+    <label>
+      Title
+      <input name="title" placeholder="Your question or headline" required />
+    </label>
+
+    <label>
+      Author
+      <input name="author" placeholder="Your name" />
+    </label>
+
+    <label>
+      Body
+      <textarea name="body" rows="8" placeholder="Write your post..."></textarea>
+    </label>
+
+    <label>
+      Tags (comma-separated)
+      <input name="tags" placeholder="e.g. web, node, express" />
+    </label>
+
+    <div class="actions">
+      <button class="btn primary" type="submit">Create</button>
+      <a class="btn secondary" href="/posts">Cancel</a>
+    </div>
+  </form>
+</div>
+
+<%- include("../partials/_foot") %>

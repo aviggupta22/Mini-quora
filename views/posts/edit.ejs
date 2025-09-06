@@ -1,0 +1,33 @@
+<%- include("../partials/_head", { title: "Edit Post" }) %>
+
+<div class="card">
+  <h2>Edit Post</h2>
+  <form method="post" action="/posts/<%= post.id %>?_method=PUT" class="stack">
+    <label>
+      Title
+      <input name="title" value="<%- post.title %>" required />
+    </label>
+
+    <label>
+      Author
+      <input name="author" value="<%- post.author %>" />
+    </label>
+
+    <label>
+      Body
+      <textarea name="body" rows="8"><%- post.body %></textarea>
+    </label>
+
+    <label>
+      Tags (comma-separated)
+      <input name="tags" value="<%- (post.tags || []).join(', ') %>" />
+    </label>
+
+    <div class="actions">
+      <button class="btn primary" type="submit">Save</button>
+      <a class="btn secondary" href="/posts/<%= post.id %>">Cancel</a>
+    </div>
+  </form>
+</div>
+
+<%- include("../partials/_foot") %>

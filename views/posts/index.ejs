@@ -1,0 +1,43 @@
+<%- include("../partials/_head", { title: "All Posts" }) %>
+
+<div class="toolbar">
+  <form method="get" action="/posts" class="inline-form">
+    <label for="tag">Filter by tag:</label>
+    <input name="tag" id="tag" value="<%= queryTag %>" placeholder="e.g. demo" />
+    <button class="btn">Filter</button>
+    <% if (queryTag) { %>
+      <a class="btn secondary" href="/posts">Clear</a>
+    <% } %>
+  </form>
+  <a class="btn primary" href="/posts/new">+ New Post</a>
+</div>
+
+<% if (!posts.length) { %>
+  <div class="empty">No posts yet. Be the first to add one!</div>
+<% } %>
+
+<ul class="post-list">
+  <% posts.forEach(p => { %>
+    <li class="post-card">
+      <h3><a href="/posts/<%= p.id %>"><%= p.title %></a></h3>
+      <div class="meta">by <strong><%= p.author %></strong></div>
+      <% if (p.tags?.length) { %>
+        <div class="tags">
+          <% p.tags.forEach(t => { %>
+            <a class="tag" href="/posts?tag=<%= encodeURIComponent(t) %>"><%= t %></a>
+          <% }) %>
+        </div>
+      <% } %>
+      <p class="preview"><%= (p.body || "").slice(0, 160) %><%= (p.body || "").length > 160 ? "..." : "" %></p>
+      <div class="actions">
+        <a class="btn" href="/posts/<%= p.id %>">View</a>
+        <a class="btn" href="/posts/<%= p.id %>/edit">Edit</a>
+        <form method="post" action="/posts/<%= p.id %>?_method=DELETE" onsubmit="return confirm('Delete this post?');">
+          <button class="btn danger" type="submit">Delete</button>
+        </form>
+      </div>
+    </li>
+  <% }) %>
+</ul>
+
+<%- include("../partials/_foot") %>

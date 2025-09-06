@@ -1,0 +1,26 @@
+<%- include("../partials/_head", { title: (post.title || "Post") }) %>
+
+<article class="card">
+  <h1><%= post.title %></h1>
+  <div class="meta">by <strong><%= post.author %></strong></div>
+
+  <% if (post.tags?.length) { %>
+    <div class="tags">
+      <% post.tags.forEach(t => { %>
+        <a class="tag" href="/posts?tag=<%= encodeURIComponent(t) %>"><%= t %></a>
+      <% }) %>
+    </div>
+  <% } %>
+
+  <p class="body"><%= post.body %></p>
+
+  <div class="actions">
+    <a class="btn" href="/posts">Back</a>
+    <a class="btn" href="/posts/<%= post.id %>/edit">Edit</a>
+    <form method="post" action="/posts/<%= post.id %>?_method=DELETE" onsubmit="return confirm('Delete this post?');">
+      <button class="btn danger" type="submit">Delete</button>
+    </form>
+  </div>
+</article>
+
+<%- include("../partials/_foot") %>
