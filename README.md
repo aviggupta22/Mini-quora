@@ -1,7 +1,7 @@
 # Mini Quora (Express + EJS)
 
 A simple Quora-like CRUD application built with **Node.js**, **Express**, **EJS**, and a RESTful API.  
-You can add, edit, delete, and view posts — both through web pages and JSON API endpoints.
+You can add, edit, delete, and view posts — both through web pages.
 
 ---
 
